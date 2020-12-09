@@ -1,0 +1,437 @@
+{
+  "certificates": [
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "DST Root CA X3", 
+        "notAfter": "20210930140115Z", 
+        "notBefore": "20000930211219Z", 
+        "o": "Digital Signature Trust Co.", 
+        "selfsigned": true
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "active", 
+      "type": "root", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=8395", 
+        "der": "https://letsencrypt.org/certs/trustid-x3-root.der", 
+        "pem": "https://letsencrypt.org/certs/trustid-x3-root.pem", 
+        "txt": "https://letsencrypt.org/certs/trustid-x3-root.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 4096, 
+        "cn": "ISRG Root X1", 
+        "notAfter": "20350604110438Z", 
+        "notBefore": "20150604110438Z", 
+        "o": "Internet Security Research Group", 
+        "selfsigned": true
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "active", 
+      "type": "root", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=9314791", 
+        "der": "https://letsencrypt.org/certs/isrgrootx1.der", 
+        "pem": "https://letsencrypt.org/certs/isrgrootx1.pem", 
+        "txt": "https://letsencrypt.org/certs/isrgrootx1.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "EC", 
+        "bits": 384, 
+        "cn": "ISRG Root X2", 
+        "notAfter": "20400917160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Internet Security Research Group", 
+        "selfsigned": true
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X2", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrg-root-x2.pem"
+      }, 
+      "status": "upcoming", 
+      "type": "root", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3335562555", 
+        "der": "https://letsencrypt.org/certs/isrg-root-x2.der", 
+        "pem": "https://letsencrypt.org/certs/isrg-root-x2.pem", 
+        "txt": "https://letsencrypt.org/certs/isrg-root-x2.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "EC", 
+        "bits": 384, 
+        "cn": "ISRG Root X2", 
+        "notAfter": "20250915160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Internet Security Research Group", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "upcoming", 
+      "type": "root", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3334561878", 
+        "der": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "R3", 
+        "notAfter": "20250915160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "active", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3334561879", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-r3.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-r3.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-r3.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "R3", 
+        "notAfter": "20210929192140Z", 
+        "notBefore": "20201007192140Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "active", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3479778542", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "EC", 
+        "bits": 384, 
+        "cn": "E1", 
+        "notAfter": "20250915160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X2", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrg-root-x2.pem"
+      }, 
+      "status": "upcoming", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3334671964", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-e1.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-e1.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-e1.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "R4", 
+        "notAfter": "20250915160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "backup", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3334561877", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-r4.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-r4.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-r4.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "R4", 
+        "notAfter": "20210929192145Z", 
+        "notBefore": "20201007192145Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "backup", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3479778543", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "EC", 
+        "bits": 384, 
+        "cn": "E2", 
+        "notAfter": "20250915160000Z", 
+        "notBefore": "20200904000000Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X2", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrg-root-x2.pem"
+      }, 
+      "status": "backup", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=3334671963", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-e2.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-e2.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-e2.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X1", 
+        "notAfter": "20200604120020Z", 
+        "notBefore": "20150604120020Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=9314792", 
+        "der": "https://letsencrypt.org/certs/letsencryptauthorityx1.der", 
+        "pem": "https://letsencrypt.org/certs/letsencryptauthorityx1.pem", 
+        "txt": "https://letsencrypt.org/certs/letsencryptauthorityx1.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X1", 
+        "notAfter": "20201019223336Z", 
+        "notBefore": "20151019223336Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=10235198", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X2", 
+        "notAfter": "20200604120031Z", 
+        "notBefore": "20150604120031Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=12721505", 
+        "der": "https://letsencrypt.org/certs/letsencryptauthorityx2.der", 
+        "pem": "https://letsencrypt.org/certs/letsencryptauthorityx2.pem", 
+        "txt": "https://letsencrypt.org/certs/letsencryptauthorityx2.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X2", 
+        "notAfter": "20201019223501Z", 
+        "notBefore": "20151019223501Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=10970235", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X3", 
+        "notAfter": "20211006154355Z", 
+        "notBefore": "20161006154355Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=47997543", 
+        "der": "https://letsencrypt.org/certs/letsencryptauthorityx3.der", 
+        "pem": "https://letsencrypt.org/certs/letsencryptauthorityx3.pem", 
+        "txt": "https://letsencrypt.org/certs/letsencryptauthorityx3.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X3", 
+        "notAfter": "20210317164046Z", 
+        "notBefore": "20160317164046Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=15706126", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X4", 
+        "notAfter": "20211006154434Z", 
+        "notBefore": "20161006154434Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "ISRG Root X1", 
+        "o": "Internet Security Research Group", 
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=47997546", 
+        "der": "https://letsencrypt.org/certs/letsencryptauthorityx4.der", 
+        "pem": "https://letsencrypt.org/certs/letsencryptauthorityx4.pem", 
+        "txt": "https://letsencrypt.org/certs/letsencryptauthorityx4.txt"
+      }
+    }, 
+    {
+      "certificate": {
+        "algorithm": "RSA", 
+        "bits": 2048, 
+        "cn": "Let's Encrypt Authority X4", 
+        "notAfter": "20210317164102Z", 
+        "notBefore": "20160317164102Z", 
+        "o": "Let's Encrypt", 
+        "selfsigned": false
+      }, 
+      "issuer": {
+        "cn": "DST Root CA X3", 
+        "o": "Digital Signature Trust Co.", 
+        "url_pem": "https://letsencrypt.org/certs/trustid-x3-root.pem"
+      }, 
+      "status": "retired", 
+      "type": "intermediate", 
+      "urls": {
+        "crtsh": "https://crt.sh/?id=15710291", 
+        "der": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.der", 
+        "pem": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem", 
+        "txt": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.txt"
+      }
+    }
+  ], 
+  "lastmod": "2020-12-09"
+}

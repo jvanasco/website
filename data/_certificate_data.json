@@ -1,0 +1,189 @@
+{
+  "lastmod": "2020-12-07",
+  "NOTE": "this file is edited by humans and used to generate `certificates.json`",
+  "certificates": [
+	{
+	  "_name": "IdenTrust",
+	  "crtsh": "https://crt.sh/?id=8395",
+	  "der": "https://letsencrypt.org/certs/trustid-x3-root.der",
+	  "pem": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "active",
+	  "txt": "https://letsencrypt.org/certs/trustid-x3-root.txt",
+	  "type": "root"
+	},
+	{
+	  "_name": "ISRG Root X1",
+	  "crtsh": "https://crt.sh/?id=9314791",
+	  "der": "https://letsencrypt.org/certs/isrgrootx1.der",
+	  "pem": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "active",
+	  "txt": "https://letsencrypt.org/certs/isrgrootx1.txt",
+	  "type": "root"
+	},
+	{
+	  "_name": "ISRG Root X2",
+	  "crtsh": "https://crt.sh/?id=3335562555",
+	  "der": "https://letsencrypt.org/certs/isrg-root-x2.der",
+	  "pem": "https://letsencrypt.org/certs/isrg-root-x2.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",
+	  "status": "upcoming",
+	  "txt": "https://letsencrypt.org/certs/isrg-root-x2.txt",
+	  "type": "root"
+	},
+	{
+	  "_name": "ISRG Root X2 - CROSS SIGNED",
+	  "cross_signed_variant_of": "https://letsencrypt.org/certs/isrg-root-x2.pem",
+	  "crtsh": "https://crt.sh/?id=3334561878",
+	  "der": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "upcoming",
+	  "txt": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.txt",
+	  "type": "root"
+	},
+	{
+	  "_name": "Let's Encrypt R3",
+	  "crtsh": "https://crt.sh/?id=3334561879",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-r3.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-r3.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "active",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-r3.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt R3 -- CROSS",
+	  "cross_signed_variant_of": "https://letsencrypt.org/certs/lets-encrypt-r3.pem",
+	  "crtsh": "https://crt.sh/?id=3479778542",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "active",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt E1",
+	  "crtsh": "https://crt.sh/?id=3334671964",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-e1.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-e1.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",
+	  "status": "upcoming",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-e1.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt R4",
+	  "crtsh": "https://crt.sh/?id=3334561877",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-r4.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-r4.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "backup",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-r4.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt R4 -- CROSS",
+	  "cross_signed_variant_of": "https://letsencrypt.org/certs/lets-encrypt-r4.pem",
+	  "crtsh": "https://crt.sh/?id=3479778543",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "backup",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt E2",
+	  "crtsh": "https://crt.sh/?id=3334671963",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-e2.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-e2.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",
+	  "status": "backup",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-e2.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X1",
+	  "crtsh": "https://crt.sh/?id=9314792",
+	  "der": "https://letsencrypt.org/certs/letsencryptauthorityx1.der",
+	  "pem": "https://letsencrypt.org/certs/letsencryptauthorityx1.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/letsencryptauthorityx1.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X1 -- CROSS",
+	  "crtsh": "https://crt.sh/?id=10235198",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X2",
+	  "crtsh": "https://crt.sh/?id=12721505",
+	  "der": "https://letsencrypt.org/certs/letsencryptauthorityx2.der",
+	  "pem": "https://letsencrypt.org/certs/letsencryptauthorityx2.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/letsencryptauthorityx2.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X2 -- CROSS",
+	  "crtsh": "https://crt.sh/?id=10970235",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X3",
+	  "crtsh": "https://crt.sh/?id=47997543",
+	  "der": "https://letsencrypt.org/certs/letsencryptauthorityx3.der",
+	  "pem": "https://letsencrypt.org/certs/letsencryptauthorityx3.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/letsencryptauthorityx3.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X3 -- CROSS",
+	  "crtsh": "https://crt.sh/?id=15706126",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X4",
+	  "crtsh": "https://crt.sh/?id=47997546",
+	  "der": "https://letsencrypt.org/certs/letsencryptauthorityx4.der",
+	  "pem": "https://letsencrypt.org/certs/letsencryptauthorityx4.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/letsencryptauthorityx4.txt",
+	  "type": "intermediate"
+	},
+	{
+	  "_name": "Let's Encrypt Authority X4 -- CROSS",
+	  "crtsh": "https://crt.sh/?id=15710291",
+	  "der": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.der",
+	  "pem": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem",
+	  "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
+	  "status": "retired",
+	  "txt": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.txt",
+	  "type": "intermediate"
+	}
+  ]
+}

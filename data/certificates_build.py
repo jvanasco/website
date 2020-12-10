@@ -1,41 +1,129 @@
 """
-{
-    "lastmod": "2020-12-08",
-    "certificates": [
-        {
-          "displayname": "ISRG Root X1",
-          "type": "root",
-          "status": "active",
-		  "urls": [
-			  "crtsh": "https://crt.sh/?id=9314791",
-			  "txt": "https://letsencrypt.org/certs/isrgrootx1.txt",
-			  "pem": "https://letsencrypt.org/certs/isrgrootx1.pem",
-			  "der": "https://letsencrypt.org/certs/isrgrootx1.der",
-			],
-			"data": [
-			  "o": "Internet Security Research Group",
-			  "cn": "ISRG Root X1",
-	          "notAfter": "20350604110438Z",
-    	      "notBefore": "20150604110438Z",
-			  "algorithm": "RSA"
-			  "bits": 4096,
-    	    ],
-        },
-    ]
-}
+# Overview
 
+This file is used to generate `certificates.json`
+
+# Usage
+
+in this directory, execute the following command:
+
+    python certificates_build.py
+
+# Requirements
+
+This script requires the following packages from PyPi, however these packages
+are required by Certbot - so this should run on a system/virtualenv that has
+Certbot installed
+
+    OpenSSL
+    requests
+
+# What this script does:
+
+This script loads the HUMAN CURATED FILE `_certificate_data.json` and uses it
+to generate the machine readable file `certificates.json`.
+
+The file `_certificate_data.json` contains core information about the various
+Root Certificates in the LetsEncrypt trust chains.
+
+This script:
+   * ensures all the Certificate files are online
+   * ensures no duplication of Certificates
+
+The input is `_certificate_data.json`, which is built on this structure:
+
+    {
+      "lastmod": "2020-12-07",
+      "certificates": [
+        <CERTIFICATE_NODE>,
+        <CERTIFICATE_NODE>,
+        <CERTIFICATE_NODE>,
+       ]
+    }
+
+An example <CERTIFICATE_NODE> is required to have this information:
+
+	{
+	  "_name": "ISRG Root X1",
+	  "crtsh": "https://crt.sh/?id=9314791",
+	  "der": "https://letsencrypt.org/certs/isrgrootx1.der",
+	  "pem": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
+	  "status": "active",
+	  "txt": "https://letsencrypt.org/certs/isrgrootx1.txt",
+	  "type": "root"
+	},
+
+The fields are:
+
+    _name: used for organizing within the document
+    type: "root" or "intermediate"
+    status: active, retired, backup, upcoming
+    URLS:
+        crtsh: URL of the certificate on crtsh
+        der: URL of the DER encoded certificate
+        pem: URL of the PEM encoded certificate
+        txt: URL of the TEXT encoded certificate
+    	signed_by: URL of the PEM encoded certificate which signed this certificate (upchain)
+    	cross_signed_variant_of: URL of the PEM encoded certificate signed by a different authority
+
+
+The output file is a JSON document with this structure:
+
+    {
+      "lastmod": "2020-12-07",
+      "lastmod_sources": "2020-12-07",
+      "certificates": [
+        <CERTIFICATE_NODE>,
+        <CERTIFICATE_NODE>,
+        <CERTIFICATE_NODE>,
+       ]
+    }
+
+In which:
+
+    * lastmod - when the file was last modified
+    * lastmod_sources - when the source file was last modified (_certificate_data.json)
+
+An example <CERTIFICATE_NODE> is generated to have this information:
+
+    {
+      "certificate": {
+        "algorithm": "RSA",
+        "bits": 4096,
+        "cn": "ISRG Root X1",
+        "notAfter": "20350604110438Z",
+        "notBefore": "20150604110438Z",
+        "o": "Internet Security Research Group",
+        "selfsigned": true
+      },
+      "issuer": {
+        "cn": "ISRG Root X1",
+        "o": "Internet Security Research Group",
+        "url_pem": "https://letsencrypt.org/certs/isrgrootx1.pem"
+      },
+      "status": "active",
+      "type": "root",
+      "urls": {
+        "crtsh": "https://crt.sh/?id=9314791",
+        "der": "https://letsencrypt.org/certs/isrgrootx1.der",
+        "pem": "https://letsencrypt.org/certs/isrgrootx1.pem",
+        "txt": "https://letsencrypt.org/certs/isrgrootx1.txt"
+      }
+    },
+
+In the above example, the URLS were copied over from the input, but the remaining
+information was extracted from the certificates.
 """
 
 # stdlib
 import datetime
-import requests
 import json
 import pprint
-import pdb
 
 # pypi
 from OpenSSL import crypto as openssl_crypto
-from Crypto.Util import asn1
+import requests
 
 
 def key_type(key):
@@ -48,198 +136,35 @@ def key_type(key):
         return "DSA"
     return None
 
+
+# load the input file
+cert_sources = None
+cert_sources_lastmod = None
+with open("_certificate_data.json", "r") as fp:
+    _data = json.loads(fp.read())
+    cert_sources = _data["certificates"]
+    cert_sources_lastmod = _data["lastmod"]
+
+# our output list
+CERTS_FORMATTED = []
+
+# track unique URLS
+UNIQUE_URL_TYPES = ("crtsh", "der", "pem", "txt")
+URLS_SEEN = {_type: [] for _type in UNIQUE_URL_TYPES}
+
+# TODO: migrate this to an ENVIRONMENT variable
 CHECK_ALTERNATE_URLS = True
-cert_sources = [
-    {
-    "_name": "IdenTrust",
-    "type": "root",
-    "status": "active",
-    "crtsh": "https://crt.sh/?id=8395",
-    "txt": "https://letsencrypt.org/certs/trustid-x3-root.txt",
-    "pem": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    "der": "https://letsencrypt.org/certs/trustid-x3-root.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",  # self-signed
-    },
-    {
-    "_name": "ISRG Root X1",
-    "type": "root",
-    "status": "active",
-    "crtsh": "https://crt.sh/?id=9314791",
-    "txt": "https://letsencrypt.org/certs/isrgrootx1.txt",
-    "pem": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    "der": "https://letsencrypt.org/certs/isrgrootx1.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",  # self-signed
-    },
-    {
-    "_name": "ISRG Root X2",
-    "type": "root",
-    "status": "upcoming",
-    "crtsh": "https://crt.sh/?id=3335562555",
-    "txt": "https://letsencrypt.org/certs/isrg-root-x2.txt",
-    "pem": "https://letsencrypt.org/certs/isrg-root-x2.pem",
-    "der": "https://letsencrypt.org/certs/isrg-root-x2.der",
-    "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",  # self-signed
-    },
-    {
-    "_name": "ISRG Root X2 - CROSS SIGNED",
-    "type": "root",
-    "status": "upcoming",
-    "crtsh": "https://crt.sh/?id=3334561878",
-    "txt": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/isrg-root-x2-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    "cross_signed_variant_of": "https://letsencrypt.org/certs/isrg-root-x2.pem",
-    },
-    {
-    "_name": "Let's Encrypt R3",
-    "type": "intermediate",
-    "status": "active",
-    "crtsh": "https://crt.sh/?id=3334561879",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-r3.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-r3.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-r3.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt R3 -- CROSS",
-    "type": "intermediate",
-    "status": "active",
-    "crtsh": "https://crt.sh/?id=3479778542",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    "cross_signed_variant_of": "https://letsencrypt.org/certs/lets-encrypt-r3.pem",
-    },
-    {
-    "_name": "Let's Encrypt E1",
-    "type": "intermediate",
-    "status": "upcoming",
-    "crtsh": "https://crt.sh/?id=3334671964",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-e1.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-e1.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-e1.der",
-    "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",
-    },
-    {
-    "_name": "Let's Encrypt R4",
-    "type": "intermediate",
-    "status": "backup",
-    "crtsh": "https://crt.sh/?id=3334561877",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-r4.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-r4.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-r4.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt R4 -- CROSS",
-    "type": "intermediate",
-    "status": "backup",
-    "crtsh": "https://crt.sh/?id=3479778543",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-r4-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    "cross_signed_variant_of": "https://letsencrypt.org/certs/lets-encrypt-r4.pem",
-    },
-    {
-    "_name": "Let's Encrypt E2",
-    "type": "intermediate",
-    "status": "backup",
-    "crtsh": "https://crt.sh/?id=3334671963",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-e2.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-e2.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-e2.der",
-    "signed_by": "https://letsencrypt.org/certs/isrg-root-x2.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X1",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=9314792",
-    "txt": "https://letsencrypt.org/certs/letsencryptauthorityx1.txt",
-    "pem": "https://letsencrypt.org/certs/letsencryptauthorityx1.pem",
-    "der": "https://letsencrypt.org/certs/letsencryptauthorityx1.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X1 -- CROSS",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=10235198",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X2",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=12721505",
-    "txt": "https://letsencrypt.org/certs/letsencryptauthorityx2.txt",
-    "pem": "https://letsencrypt.org/certs/letsencryptauthorityx2.pem",
-    "der": "https://letsencrypt.org/certs/letsencryptauthorityx2.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X2 -- CROSS",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=10970235",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X3",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=47997543",
-    "txt": "https://letsencrypt.org/certs/letsencryptauthorityx3.txt",
-    "pem": "https://letsencrypt.org/certs/letsencryptauthorityx3.pem",
-    "der": "https://letsencrypt.org/certs/letsencryptauthorityx3.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X3 -- CROSS",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=15706126",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X4",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=47997546",
-    "txt": "https://letsencrypt.org/certs/letsencryptauthorityx4.txt",
-    "pem": "https://letsencrypt.org/certs/letsencryptauthorityx4.pem",
-    "der": "https://letsencrypt.org/certs/letsencryptauthorityx4.der",
-    "signed_by": "https://letsencrypt.org/certs/isrgrootx1.pem",
-    },
-    {
-    "_name": "Let's Encrypt Authority X4 -- CROSS",
-    "type": "intermediate",
-    "status": "retired",
-    "crtsh": "https://crt.sh/?id=15710291",
-    "txt": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.txt",
-    "pem": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem",
-    "der": "https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.der",
-    "signed_by": "https://letsencrypt.org/certs/trustid-x3-root.pem",
-    },
-]
 
-
-
-certs_formatted = []
 
 for cert_payload in cert_sources:
+
+    # lightweight error checking
+    # these are unique!
+    for _url_type in UNIQUE_URL_TYPES:
+        _unique_url = cert_payload[_url_type]
+        assert _unique_url not in URLS_SEEN[_url_type]
+        URLS_SEEN[_url_type].append(_unique_url)
+
     url = cert_payload["pem"]
     print("processing: %s" % url)
     r_pem = requests.get(url)
@@ -264,6 +189,7 @@ for cert_payload in cert_sources:
         r_der = requests.get(cert_payload["der"])
         assert r_der.status_code == 200
 
+    # this is the output payload
     cert_data = {
         "type": cert_payload["type"],
         "status": cert_payload["status"],
@@ -280,32 +206,27 @@ for cert_payload in cert_sources:
             "notBefore": cert_object.get_notBefore(),
             "algorithm": key_type(cert_pubkey),
             "bits": cert_pubkey.bits(),
-            "selfsigned": True if cert_payload["signed_by"] == cert_payload['pem'] else False,
+            "selfsigned": True
+            if cert_payload["signed_by"] == cert_payload["pem"]
+            else False,
         },
         "issuer": {
             "o": issuer["O"],
             "cn": issuer["CN"],
             "url_pem": cert_payload["signed_by"],
-        }
+        },
     }
-    certs_formatted.append(cert_data)
+    CERTS_FORMATTED.append(cert_data)
 
 
-
-
-#pprint.pprint(certs_formatted)
-# print("------")
+# format our JSON payload
 _today = datetime.datetime.today()
-certs_json = {
+CERTS_JSON = {
     "lastmod": _today.strftime("%Y-%0m-%0d"),
-    "certificates": certs_formatted,
+    "lastmod_sources": cert_sources_lastmod,
+    "certificates": CERTS_FORMATTED,
 }
 
+# write our JSON payload
 with open("certificates.json", "w") as fp:
-    fp.write(json.dumps(certs_json, sort_keys=True, indent=2))
-
-
-
-
-
-
+    fp.write(json.dumps(CERTS_JSON, sort_keys=True, indent=2))
